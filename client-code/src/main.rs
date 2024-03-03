@@ -12,13 +12,13 @@ fn lala(){
    thread::sleep(Duration::from_millis(100));
 }
 fn main(){
-    let mut client = TcpStream::connect(LOCAL).expect("Client failed to connect to the server port and IP");
+    let mut client = TcpStream::connect(LOCAL).expect("Client failed to connect to the server port and IP,check if server is on");
     client.set_nonblocking(true).expect("Failed to initialize non-blocking");
 
     let (tx, rx) = mpsc::channel::<String>();   
 
     thread::spawn(move || loop {
-        
+
         let mut buff = vec![0; MSG_SIZE];
         match client.read_exact(&mut buff){
             Ok(_) => {
