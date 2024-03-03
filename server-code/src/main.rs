@@ -13,5 +13,16 @@ const MSG_SIZE: usize = 1000;
 fn main() {
     //Bind the server to the IP address and port number
     let server = TcpListener::bind(LOCAL).expect("Listener failed to bind");
+    server.set_nonblocking(true).expect("Non-blocking not working");
+    //Create a vector to store the clients
+    let mut clients = vec![];
+    //Create a channel to send messages between threads
+    let (tx, rx) = mpsc::channel::<String>();
+    loop {
+        //If a client connects, accept the connection and store the client
+        if let Ok((mut socket, addr)) = server.accept() {
+            println!("Client {} connected", addr);
+            
+    }
 }
 
