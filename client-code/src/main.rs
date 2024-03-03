@@ -5,10 +5,9 @@ use std::sync::mpsc::{self, TryRecvError};
 use std::thread;
 use std::time::Duration;
 
-const LOCAL: &str = "127:0:0:1:6000";
+const LOCAL: &str = "127.0.0.1:6000";
 const MSG_SIZE: usize = 1000;
 fn lala(){
-    println!("Sleeping to not use all the CPU");
    thread::sleep(Duration::from_millis(100));
 }
 fn main(){
