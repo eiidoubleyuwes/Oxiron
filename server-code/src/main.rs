@@ -10,6 +10,12 @@ use std::sync::mpsc;
 //The message size is also defined as 1000 bits to facilitate long messages
 const LOCAL: &str = "127.0.0.1:6000";
 const MSG_SIZE: usize = 1000;
+
+fn lala(){
+    println!("Sleeping to save CPU and other resources");
+    //Sleep for a short time to avoid using too much CPU
+    thread::sleep(std::time::Duration::from_millis(100));
+}
 fn main() {
     //Bind the server to the IP address and port number
     let server = TcpListener::bind(LOCAL).expect("Listener failed to bind");
@@ -52,10 +58,31 @@ fn main() {
                         client.write_all(&buff).map(|_| client).ok()
                     }).collect::<Vec<_>>();
                 }
-                //Sleep for a short time to avoid using too much CPU
-                thread::sleep(std::time::Duration::from_millis(100));
+                 //If a client disconnects, remove it from the vector
+            clients.into_iter().filter_map(|mut client| {
+                let mut buff = vec![0; MSG_SIZE];
+                //If the client is still connected, keep it in the vector
+                match client.read_exact(&mut buff) {
+                    Ok(_) => Some(client),
+                    Err(ref err) if err.kind() == ErrorKind::WouldBlock => Some(client),
+                    Err(_) => {
+                        println!("Client disconnected");
+                        None
+                    }
+                }
+            }).collect::<Vec<_>>();
+                lala();
+               
             });
         }
+
+            if let Ok(msg) = rx.try_recv() {
+                clients = clients.into_iter().filter_map(|mut client| {
+                    let mut buff = msg.clone().into_bytes();
+                    buff.resize(MSG_SIZE, 0);
+                    client.write_all(&buff).map(|_| client).ok()
+                }).collect::<Vec<_>>();
+            }
     }
 }
 
