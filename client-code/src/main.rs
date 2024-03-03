@@ -7,6 +7,10 @@ use std::time::Duration;
 
 const LOCAL: &str = "127:0:0:1:6000";
 const MSG_SIZE: usize = 1000;
+fn lala(){
+    println!("Sleeping to not use all the CPU");
+   thread::sleep(Duration::from_millis(100));
+}
 fn main(){
     let mut client = TcpStream::connect(LOCAL).expect("Client failed to connect to the server port and IP");
     client.set_nonblocking(true).expect("Failed to initialize non-blocking");
@@ -37,7 +41,15 @@ fn main(){
             Err(TryRecvError::Empty) => (),
             Err(TryRecvError::Disconnected) => break
         }
-        thread::sleep(Duration::from_millis(100));
+        lala();
     });
+    println!("Write a message:");
+    loop {
+        let mut buff = String::new();
+        io::stdin().read_line(&mut buff).expect("Reading Unable to read message");
+        let msg = buff.trim().to_string();
+        if msg == ":done" || tx.send(msg).is_err() {break}
+    }
+    print!("See you soon!");
 
 }
