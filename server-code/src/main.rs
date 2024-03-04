@@ -4,10 +4,10 @@ use std::net::TcpListener;
 use std::io::{Read, Write, ErrorKind};
 use std::thread;
 use std::sync::mpsc;
+use dotenv::dotenv;
 
 //Defining useful constants such as IP and port numbers
 //1000 bits is to faciliate long messages
-const LOCAL: &str = "127.0.0.1:6000";
 const MSG_SIZE: usize = 1000;
 
 fn lala(){
@@ -16,8 +16,11 @@ fn lala(){
 }
 
 fn main() {
+    //Stored server location in a .env file because it will be hosted on aws
+    dotenv().ok();
+    let location = std::env::var("Local").expect("Server must be set");
     //Bind the server to the IP address and port number
-    let server = TcpListener::bind(LOCAL).expect("Listener failed to bind");
+    let server = TcpListener::bind(location).expect("Listener failed to bind");
     server.set_nonblocking(true).expect("Non-blocking not working");
     //Create a vector to store the clients
     let mut clients = vec![];
