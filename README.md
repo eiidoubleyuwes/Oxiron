@@ -9,4 +9,4 @@ The code has two parts:
 Future of the project:
   1. Allow another client to join the server and send messages back and forth between the server and other clients.
   2. A UI built in maybe Slint or any framework that I may deem fit.
-  3. Host the code on AWS or something.
+  3. Host the code on AWS or something,preferrably on an EC2 instance.
