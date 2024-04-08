@@ -60,5 +60,5 @@ fn rocket() -> _ {
 		.manage(channel::<Message>(1024).0)//get the first element of the tuple
         .mount("/", routes![post, events])
 		//Handler to mount static files in a folder called static
-		.mount("/", FileServer::from(relative!("static")))
+		.mount("/", FileServer::from(relative!("frontend")))
 }
