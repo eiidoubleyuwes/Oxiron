@@ -1,3 +1,4 @@
+workspace = { members = ["Old_code/client-code"] }
 [package]
 name = "code"
 version = "0.1.0"
