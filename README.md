@@ -17,7 +17,22 @@ Future of the project:
 This is how the code looks:
 ![screenshot-127 ![Screenshot from 2024-04-08 23-13-55](https://github.com/eiidoubleyuwes/Oxiron/assets/148796574/2102306a-8e26-4b57-921a-ba990dae9742)
 
-0 0 1_8000-2024 04 08-23_11_21](https://github.com/eiidoubleyuwes/Oxiron/assets/148796574/8847e0d2-16c5-481e-9a7c-ce7d5706361f)
+
+
+
+
+
+
+
+
+
+
+
+
+    0 0 1_8000-2024 04 08-23_11_21](https://github.com/eiidoubleyuwes/Oxiron/assets/148796574/8847e0d2-16c5-481e-9a7c-ce7d5706361f)
+  
+  
+  
 
 
 
